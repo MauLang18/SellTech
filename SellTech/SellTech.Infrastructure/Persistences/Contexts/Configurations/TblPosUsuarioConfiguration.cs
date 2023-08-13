@@ -30,6 +30,10 @@ namespace SellTech.Infrastructure.Persistences.Contexts.Configurations
                 .HasMaxLength(50)
                 .IsUnicode(false)
                 .HasColumnName("USERNAME");
+            builder.Property(e => e.AuthType)
+                .HasMaxLength(15)
+                .IsUnicode(false)
+                .HasColumnName("AUTHTYPE");
             builder.Property(e => e.UsuarioActualizacionAuditoria).HasColumnName("USUARIO_ACTUALIZACION_AUDITORIA");
             builder.Property(e => e.UsuarioCreacionAuditoria).HasColumnName("USUARIO_CREACION_AUDITORIA");
             builder.Property(e => e.UsuarioEliminacionAuditoria).HasColumnName("USUARIO_ELIMINACION_AUDITORIA");

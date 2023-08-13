@@ -1,6 +1,7 @@
 using SellTech.Api.Extensions;
 using SellTech.Application.Extensions;
 using SellTech.Infrastructure.Extensions;
+using SellTech.Utilities.AppSettings;
 using WatchDog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +13,8 @@ builder.Services.AddInjectionInfrastructure(Configuration);
 builder.Services.AddInjectionApplication(Configuration);
 builder.Services.AddAuthentication(Configuration);
 builder.Services.AddSwagger();
+
+builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("GoogleSettings"));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

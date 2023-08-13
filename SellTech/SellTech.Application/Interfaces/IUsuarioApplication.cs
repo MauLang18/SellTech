@@ -6,6 +6,5 @@ namespace SellTech.Application.Interfaces
     public interface IUsuarioApplication
     {
         Task<BaseResponse<bool>> RegisterUsuario(UsuarioRequestDto requestDto);
-        Task<BaseResponse<string>> GenerateToken(TokenRequestDto requestDto);
     }
 }

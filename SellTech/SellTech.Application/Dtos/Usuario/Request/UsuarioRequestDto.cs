@@ -10,7 +10,9 @@ namespace SellTech.Application.Dtos.Usuario.Request
 
         public string? Correo { get; set; } 
 
-        public IFormFile? Imagen { get; set; } 
+        public IFormFile? Imagen { get; set; }
+
+        public string? AuthType { get; set; }
 
         public int? Estado { get; set; }
     }

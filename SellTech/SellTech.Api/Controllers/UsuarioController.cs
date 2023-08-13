@@ -25,14 +25,5 @@ namespace SellTech.Api.Controllers
 
             return Ok(response);
         }
-
-        [AllowAnonymous]
-        [HttpPost("Generate/Token")]
-        public async Task<IActionResult> GenerateTokenUsuario([FromBody] TokenRequestDto requestDto)
-        {
-            var response = await _usuarioApplication.GenerateToken(requestDto);
-
-            return Ok(response);
-        }
     }
 }

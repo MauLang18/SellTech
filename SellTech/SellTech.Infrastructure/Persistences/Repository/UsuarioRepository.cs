@@ -13,11 +13,12 @@ namespace SellTech.Infrastructure.Persistences.Repository
             _context = context;
         }
 
-        public async Task<TblPosUsuario> AccountByUserName(string userName)
+        public async Task<TblPosUsuario> UserByEmail(string email)
         {
-            var account = await _context.TblPosUsuarios.AsNoTracking().FirstOrDefaultAsync(x => x.Username!.Equals(userName));
+            var user = await _context.TblPosUsuarios.AsNoTracking()
+                .FirstOrDefaultAsync(x => x.Correo!.Equals(email));
 
-            return account;
+            return user;
         }
     }
 }
