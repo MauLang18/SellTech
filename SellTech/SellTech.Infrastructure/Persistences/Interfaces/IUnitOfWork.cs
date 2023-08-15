@@ -10,6 +10,7 @@ namespace SellTech.Infrastructure.Persistences.Interfaces
         IUsuarioRepository Usuario { get; }
         IAzureStorage Storage { get; }
         IProveedorRepository Proveedor { get; }
+        ITipoDocumentoRepository TipoDocumento { get; }
 
         void SaveChanges();
         Task SaveChangesAsync();

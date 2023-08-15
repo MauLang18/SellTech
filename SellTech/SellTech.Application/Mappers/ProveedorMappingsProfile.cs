@@ -17,6 +17,10 @@ namespace SellTech.Application.Mappers
                 .ForMember(x => x.EstadoProveedor, x => x.MapFrom(y => y.Estado.Equals((int)StateTypes.Activo) ? "Activo" : "Inactivo"))
                 .ReverseMap();
 
+            CreateMap<TblPosProveedor, ProveedorByIdResponseDto>()
+                .ForMember(x => x.PkTblPosProveedor, x => x.MapFrom(y => y.Id))
+                .ReverseMap();
+
             CreateMap<BaseEntityResponse<TblPosProveedor>, BaseEntityResponse<ProveedorResponseDto>>().
                 ReverseMap();
 

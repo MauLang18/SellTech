@@ -18,8 +18,8 @@ namespace SellTech.Api.Controllers
             _proveedorApplication = proveedorApplication;
         }
 
-        [HttpPost]
-        public async Task<IActionResult> ListProveedores([FromBody] BaseFiltersRequest filters)
+        [HttpGet]
+        public async Task<IActionResult> ListProveedores([FromQuery] BaseFiltersRequest filters)
         {
             var response = await _proveedorApplication.ListProveedores(filters);
 

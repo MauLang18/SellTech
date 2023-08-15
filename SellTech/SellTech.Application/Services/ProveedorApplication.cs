@@ -54,9 +54,9 @@ namespace SellTech.Application.Services
             return response;
         }
 
-        public async Task<BaseResponse<ProveedorResponseDto>> ProveedorById(int pkTblPosProveedor)
+        public async Task<BaseResponse<ProveedorByIdResponseDto>> ProveedorById(int pkTblPosProveedor)
         {
-            var response = new BaseResponse<ProveedorResponseDto>();
+            var response = new BaseResponse<ProveedorByIdResponseDto>();
 
             try
             {
@@ -65,7 +65,7 @@ namespace SellTech.Application.Services
                 if (proveedor is not null)
                 {
                     response.IsSuccess = true;
-                    response.Data = _mapper.Map<ProveedorResponseDto>(proveedor);
+                    response.Data = _mapper.Map<ProveedorByIdResponseDto>(proveedor);
                     response.Message = ReplyMessage.MESSAGE_QUERY;
                 }
                 else

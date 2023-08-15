@@ -16,6 +16,8 @@ namespace SellTech.Infrastructure.Persistences.Repository
 
         public IProveedorRepository Proveedor { get; private set; }
 
+        public ITipoDocumentoRepository TipoDocumento { get; private set; }
+
         public UnitOfWork(BdPosContext context, IConfiguration configuration)
         {
             _context = context;
@@ -23,6 +25,7 @@ namespace SellTech.Infrastructure.Persistences.Repository
             Usuario = new UsuarioRepository(_context);
             Storage = new AzureStorage(configuration);
             Proveedor = new ProveedorRepository(_context);
+            TipoDocumento = new TipoDocumentoRepository(_context);
         }
 
         public void Dispose()
