@@ -2,7 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using SellTech.Application.Dtos.Proveedor.Request;
 using SellTech.Application.Interfaces;
+using SellTech.Application.Services;
 using SellTech.Infrastructure.Commons.Bases.Request;
+using SellTech.Utilities.Static;
 
 namespace SellTech.Api.Controllers
 {
@@ -12,16 +14,25 @@ namespace SellTech.Api.Controllers
     public class ProveedorController : ControllerBase
     {
         private readonly IProveedorApplication _proveedorApplication;
+        private readonly IGenerateExcelApplication _generateExcelApplication;
 
-        public ProveedorController(IProveedorApplication proveedorApplication)
+        public ProveedorController(IProveedorApplication proveedorApplication, IGenerateExcelApplication generateExcelApplication)
         {
             _proveedorApplication = proveedorApplication;
+            _generateExcelApplication = generateExcelApplication;
         }
 
         [HttpGet]
         public async Task<IActionResult> ListProveedores([FromQuery] BaseFiltersRequest filters)
         {
             var response = await _proveedorApplication.ListProveedores(filters);
+
+            if ((bool)filters.Download!)
+            {
+                var columnNames = ExcelColumnNames.GetColumnsProveedores();
+                var fileBytes = _generateExcelApplication.GenerateToExcel(response.Data!, columnNames);
+                return File(fileBytes, ContentType.ContentTypeExcel);
+            }
 
             return Ok(response);
         }

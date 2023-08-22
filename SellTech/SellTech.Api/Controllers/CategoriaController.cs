@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using SellTech.Application.Dtos.Categoria.Request;
 using SellTech.Application.Interfaces;
 using SellTech.Infrastructure.Commons.Bases.Request;
+using SellTech.Utilities.Static;
 
 namespace SellTech.API.Controllers
 {
@@ -13,16 +14,25 @@ namespace SellTech.API.Controllers
     public class CategoriaController : ControllerBase
     {
         private readonly ICategoriaApplication _categoriaApplication;
+        private readonly IGenerateExcelApplication _generateExcelApplication;
 
-        public CategoriaController(ICategoriaApplication categoriaApplication)
+        public CategoriaController(ICategoriaApplication categoriaApplication, IGenerateExcelApplication generateExcelApplication)
         {
             _categoriaApplication = categoriaApplication;
+            _generateExcelApplication = generateExcelApplication;
         }
 
-        [HttpPost]
-        public async Task<IActionResult> ListCategorias([FromBody] BaseFiltersRequest filters)
+        [HttpGet]
+        public async Task<IActionResult> ListCategorias([FromQuery] BaseFiltersRequest filters)
         {
             var response = await _categoriaApplication.ListCategorias(filters);
+
+            if ((bool)filters.Download!)
+            {
+                var columnNames = ExcelColumnNames.GetColumnsCategorias();
+                var fileBytes = _generateExcelApplication.GenerateToExcel(response.Data!, columnNames);
+                return File(fileBytes, ContentType.ContentTypeExcel);
+            }
 
             return Ok(response);
         }

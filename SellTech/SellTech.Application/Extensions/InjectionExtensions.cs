@@ -28,6 +28,7 @@ namespace SellTech.Application.Extensions
             services.AddScoped<IProveedorApplication, ProveedorApplication>();
             services.AddScoped<IAuthApplication, AuthApplication>();
             services.AddScoped<ITipoDocumentoApplication, TipoDocumentoApplication>();
+            services.AddScoped<IGenerateExcelApplication, GenerateExcelApplication>();
 
             services.AddWatchDog();
 

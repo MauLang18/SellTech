@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SellTech.Infrastructure.FileExcel;
 using SellTech.Infrastructure.FileStorage;
 using SellTech.Infrastructure.Persistences.Contexts;
 using SellTech.Infrastructure.Persistences.Interfaces;
@@ -21,6 +22,7 @@ namespace SellTech.Infrastructure.Extensions
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddTransient<IAzureStorage, AzureStorage>();
+            services.AddTransient<IGenerateExcel, GenerateExcel>();
 
             return services;
         }
